@@ -20,8 +20,8 @@ export default function Navbar() {
                     <div className="flex justify-between items-center h-20">
                         {/* Mobile Menu Button */}
                         <div className="flex items-center md:hidden">
-                            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800">
-                                {isOpen ? <X size={28} /> : <Menu size={28} />}
+                            <button onClick={() => setIsOpen(!isOpen)} className="text-[#6E0D25] bg-gray-50 p-1.5 rounded-lg border border-gray-200 shadow-sm active:bg-gray-100 transition">
+                                {isOpen ? <X size={26} /> : <Menu size={26} />}
                             </button>
                         </div>
 
@@ -64,33 +64,43 @@ export default function Navbar() {
                 {/* Mobile Sidebar Navigation */}
                 <AnimatePresence>
                     {isOpen && (
-                        <motion.div
-                            initial={{ x: "-100%" }}
-                            animate={{ x: 0 }}
-                            exit={{ x: "-100%" }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl z-50 md:hidden flex flex-col"
-                        >
-                            <div className="p-4 border-b border-gray-100 flex justify-between items-center">
-                                <span className="font-playfair text-xl font-bold text-[#6E0D25]">Bramara Menu</span>
-                                <button onClick={() => setIsOpen(false)}><X size={24} className="text-gray-500" /></button>
-                            </div>
-                            <div className="flex flex-col py-4 font-poppins">
-                                <Link href="/" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Home</Link>
-                                <Link href="/shop" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Shop All Categories</Link>
-                                <Link href="/trending" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Trending in Andhra</Link>
-                                <Link href="/bridal-box" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800 flex justify-between items-center">
-                                    Bridal Box <span className="bg-[#C6A756] text-white text-xs px-2 py-1 rounded">New</span>
-                                </Link>
-                                <Link href="/compare" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Compare Sarees</Link>
-                                <div className="px-6 py-4 mt-auto">
-                                    <Link href="/schedule-call" onClick={() => setIsOpen(false)} className="w-full bg-[#6E0D25] text-white py-3 rounded-md flex items-center justify-center space-x-2 font-semibold">
-                                        <Video size={20} />
-                                        <span>Book Live Demo</span>
-                                    </Link>
+                        <>
+                            {/* Dark Overlay Background */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setIsOpen(false)}
+                                className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                            />
+                            <motion.div
+                                initial={{ x: "-100%" }}
+                                animate={{ x: 0 }}
+                                exit={{ x: "-100%" }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                className="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl z-50 md:hidden flex flex-col"
+                            >
+                                <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+                                    <span className="font-playfair text-xl font-bold text-[#6E0D25]">Bramara Menu</span>
+                                    <button onClick={() => setIsOpen(false)}><X size={24} className="text-gray-500" /></button>
                                 </div>
-                            </div>
-                        </motion.div>
+                                <div className="flex flex-col py-4 font-poppins">
+                                    <Link href="/" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Home</Link>
+                                    <Link href="/shop" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Shop All Categories</Link>
+                                    <Link href="/trending" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Trending in Andhra</Link>
+                                    <Link href="/bridal-box" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800 flex justify-between items-center">
+                                        Bridal Box <span className="bg-[#C6A756] text-white text-xs px-2 py-1 rounded">New</span>
+                                    </Link>
+                                    <Link href="/compare" onClick={() => setIsOpen(false)} className="px-6 py-3 border-b border-gray-50 text-gray-800">Compare Sarees</Link>
+                                    <div className="px-6 py-4 mt-auto">
+                                        <Link href="/schedule-call" onClick={() => setIsOpen(false)} className="w-full bg-[#6E0D25] text-white py-3 rounded-md flex items-center justify-center space-x-2 font-semibold">
+                                            <Video size={20} />
+                                            <span>Book Live Demo</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </>
                     )}
                 </AnimatePresence>
             </nav>
