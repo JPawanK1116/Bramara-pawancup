@@ -1,97 +1,36 @@
-# Bramara Sarees – Digital Boutique Engine
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Welcome to the **Bramara Sarees** digital boutique platform (Phase 1). This is a highly premium, custom-built e-commerce foundation for Macherla's finest silk boutique, offering an immersive UI/UX designed specifically to elevate the online saree shopping experience.
+## Getting Started
 
-## ✨ Features Built in Phase-1
-
-This initial phase focuses heavily on **Premium Aesthetics, Mobile-First User Experience, and WhatsApp Checkout Integration.**
-
-*   **📱 Mobile-First Layout**: Custom sticky bottom navigation bar designed for extremely high engagement.
-*   **🎬 Reel Shopping Experience**: An Instagram-style vertical scrolling carousel for discovering new arrivals (currently uses high-resolution images, pre-configured to handle video).
-*   **💍 Bridal Box Builder**: An interactive bundle generator letting brides estimate costs across Wedding, Reception, Mehendi, and Return Gifts. 
-*   **🤝 Trust Block**: Hand-crafted trust sections establishing the local Macherla legacy, 100% Originality, and Easy Returns.
-*   **⚖️ Saree Comparison Tool**: A dedicated interface allowing users to compare up to 3 sarees side-by-side based on weight, washing instructions, and fabric type.
-*   **📞 Smart Video Call Scheduling**: A rich funnel allowing users to submit preferences (budget, occasion) and directly book a personalized live draping/demo over WhatsApp/Video Call.
-*   **💬 Direct WhatsApp Checkout**: Instead of a traditional complex payment gateway (planned for Phase 2), the current cart automatically computes totals and generates a pre-filled, highly detailed WhatsApp message sent straight to the store owner.
-*   **📖 Fabric Education**: Built-in elegantly designed accordions explaining Kanjivaram vs Banarasi fabrics and care tips.
-
-## 🛠 Tech Stack (Performance First)
-
-### Frontend
-*   **Framework**: Next.js 14 (App Router)
-*   **Language**: TypeScript
-*   **Styling**: Tailwind CSS
-*   **Animations**: Framer Motion
-*   **Carousels**: Swiper.js
-*   **Icons**: Lucide React
-
-### Backend (Prepared for Phase 2)
-*   **Runtime**: Node.js
-*   **Framework**: Express.js
-*   **Database Setup**: MongoDB & Mongoose (Schemas initialized)
-
----
-
-## 🚀 How to Run the Project Locally
-
-To run the full application (Frontend & Backend) on your local machine, follow these simple steps.
-
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
-Ensure you have MongoDB running locally if you wish to start the backend (Backend running is optional for Phase 1 frontend evaluation).
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/Jpawancup/bramara-pawancup.git
-cd bramara-pawancup
-```
-
-### 2. Setup and Run the Frontend (UI/UX)
-The frontend contains the entirety of the Phase-1 visual experience.
+First, run the development server:
 
 ```bash
-cd frontend
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-The application will now be running at **http://localhost:3000**. Open that in your browser to experience the premium boutique design!
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 3. Setup and Run the Backend (Optional for Phase 1 API setups)
-The backend folder contains the basic Express server and MongoDB models ready for future CMS/Dashboard integration.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-cd ../backend
-npm install
-npm start
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-The API will run on **http://localhost:5000**.
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## 📁 Directory Structure Overview
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```text
-bramara-sarees/
-│
-├── frontend/             # Next.js 14 App Router
-│   ├── app/              # Core routing (shop, compare, bridal-box, etc.)
-│   ├── components/       # Reusable UI components (ProductCard, ReelCarousel)
-│   ├── public/assets/    # Categorized placeholder images (hero, products, etc.)
-│   └── tailwind.config.ts
-│
-├── backend/              # Node.js/Express Setup
-│   ├── models/           # Mongoose schemas (Product.js)
-│   ├── routes/           # API routes
-│   ├── controllers/      # API logic
-│   └── server.js         # Entry point
-│
-└── README.md
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 🔮 Roadmap (Phase 2 & Beyond)
-*   Integrate highly secure Razorpay Payment Gateway.
-*   Develop a full internal Admin dashboard for product/inventory management.
-*   Convert Phase-1 Placeholder images to dynamic Cloudinary endpoints.
-*   Replace Reel placeholder images with actual `.mp4` video looping sources.
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
