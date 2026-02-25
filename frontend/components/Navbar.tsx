@@ -95,33 +95,43 @@ export default function Navbar() {
                 </AnimatePresence>
             </nav>
 
-            {/* Mobile Bottom Sticky Bar */}
-            <div className="fixed bottom-0 w-full bg-white border-t p-2 flex justify-around items-center z-40 md:hidden font-poppins text-xs pb-safe">
-                <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
-                    <span className="text-lg">🏠</span>
-                    <span className="mt-1">Home</span>
-                </Link>
-                <Link href="/shop" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
-                    <span className="text-lg">👗</span>
-                    <span className="mt-1">Shop</span>
-                </Link>
-                <div className="relative -top-5">
-                    <Link href="/schedule-call" className="bg-[#6E0D25] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-[#6E0D25]/30">
-                        <Video size={24} />
+            {/* Mobile Bottom Sticky Bar & Footer */}
+            <div className="fixed bottom-0 w-full z-40 md:hidden flex flex-col">
+                <div className="bg-white border-t border-gray-100 p-2 flex justify-around items-center font-poppins text-xs w-full relative">
+                    <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
+                        <span className="text-lg">🏠</span>
+                        <span className="mt-1">Home</span>
+                    </Link>
+                    <Link href="/shop" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
+                        <span className="text-lg">👗</span>
+                        <span className="mt-1">Shop</span>
+                    </Link>
+                    <div className="relative -top-6">
+                        <Link href="/schedule-call" className="bg-[#6E0D25] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-[#6E0D25]/30 border-4 border-white">
+                            <Video size={24} />
+                        </Link>
+                    </div>
+                    <Link href="/compare" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
+                        <span className="text-lg">⚖️</span>
+                        <span className="mt-1">Compare</span>
+                    </Link>
+                    <Link href="/cart" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25] relative">
+                        <span className="text-lg">🛒</span>
+                        <span className="absolute -top-1 right-2 bg-[#C6A756] text-white text-[9px] w-3 h-3 rounded-full flex items-center justify-center">2</span>
+                        <span className="mt-1">Cart</span>
                     </Link>
                 </div>
-                <Link href="/compare" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25]">
-                    <span className="text-lg">⚖️</span>
-                    <span className="mt-1">Compare</span>
-                </Link>
-                <Link href="/cart" className="flex flex-col items-center text-gray-600 hover:text-[#6E0D25] relative">
-                    <span className="text-lg">🛒</span>
-                    <span className="absolute -top-1 right-2 bg-[#C6A756] text-white text-[9px] w-3 h-3 rounded-full flex items-center justify-center">2</span>
-                    <span className="mt-1">Cart</span>
-                </Link>
+                <div className="bg-[#1a1a1a] text-gray-400 text-[10px] text-center py-1.5 w-full font-poppins tracking-widest pb-safe">
+                    Designed and Developed by <span className="font-bold text-[#C6A756]">Crawlup</span>
+                </div>
             </div>
 
-            <div className="h-20 md:h-[104px] w-full" /> {/* Spacer */}
+            {/* Desktop Bottom Static Line */}
+            <div className="fixed bottom-0 w-full bg-[#1a1a1a] text-gray-400 text-[11px] py-1.5 text-center z-50 hidden md:block font-poppins tracking-widest border-t border-[#C6A756]/20">
+                Designed and Developed by <span className="font-bold text-[#C6A756] tracking-normal">Crawlup</span>
+            </div>
+
+            <div className="h-24 md:h-[104px] w-full" /> {/* Spacer */}
         </>
     );
 }
