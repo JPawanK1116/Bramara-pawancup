@@ -1,13 +1,23 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ShoppingCart, Video, Search, User, Heart } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => {
+            document.body.style.overflow = "auto"; // Ensure reset on unmount
+        };
+    }, [isOpen]);
 
     return (
         <>
@@ -63,82 +73,76 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* Mobile Sidebar Navigation */}
-                <AnimatePresence>
-                    {isOpen && (
-                        <>
-                            {/* Dark Overlay Background */}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                onClick={() => setIsOpen(false)}
-                                className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
-                            />
-                            <motion.div
-                                initial={{ x: "-100%" }}
-                                animate={{ x: 0 }}
-                                exit={{ x: "-100%" }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className="fixed inset-y-0 left-0 h-full w-[75%] bg-white shadow-2xl z-50 p-6 md:hidden flex flex-col transition-transform duration-300 font-poppins"
-                            >
-                                <div className="flex justify-between items-center mb-6">
-                                    <Link href="/" onClick={() => setIsOpen(false)} className="font-playfair text-xl font-bold text-[#6E0D25]">
-                                        Bramara <span className="text-[#C6A756] italic">Sarees</span>
-                                    </Link>
-                                    <button onClick={() => setIsOpen(false)}>
-                                        <X size={24} className="text-gray-500 hover:text-gray-800 transition-colors" />
-                                    </button>
-                                </div>
-                                <hr className="border-gray-100 border-t-2 mb-6" />
-
-                                <div className="flex flex-col space-y-5">
-                                    <Link href="/" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Home</Link>
-                                    <Link href="/shop" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Shop</Link>
-                                    <Link href="/trending" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Trending</Link>
-                                    <Link href="/bridal-box" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors flex justify-between items-center">
-                                        Bridal Box <span className="bg-[#C6A756] text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">New</span>
-                                    </Link>
-                                    <Link href="/compare" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Compare</Link>
-                                    <Link href="/about" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">About</Link>
-                                    <Link href="/contact" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Contact</Link>
-                                </div>
-
-                                <div className="mt-auto pt-6 border-t border-gray-100">
-                                    <Link href="/schedule-call" onClick={() => setIsOpen(false)} className="w-full bg-[#128C7E] text-white py-3.5 rounded-xl flex items-center justify-center space-x-2 font-bold shadow-lg shadow-[#128C7E]/20 hover:bg-[#075E54] hover:scale-105 transition-all duration-300">
-                                        <Video size={20} />
-                                        <span>WhatsApp Chat</span>
-                                    </Link>
-                                </div>
-                            </motion.div>
-                        </>
-                    )}
-                </AnimatePresence>
             </nav>
+
+            {/* Mobile Drawer Overlay */}
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+
+            {/* Mobile Drawer */}
+            <div
+                className={`fixed top-0 left-0 h-full w-[80%] bg-white z-50 shadow-2xl border-r transform-gpu transition-transform duration-300 ease-in-out md:hidden flex flex-col overflow-y-auto will-change-transform font-poppins ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    }`}
+            >
+                <div className="flex justify-between items-center p-6 mb-2">
+                    <Link href="/" onClick={() => setIsOpen(false)} className="font-playfair text-xl font-bold text-[#6E0D25]">
+                        Bramara <span className="text-[#C6A756] italic">Sarees</span>
+                    </Link>
+                    <button onClick={() => setIsOpen(false)}>
+                        <X size={24} className="text-gray-500 hover:text-gray-800 transition-colors" />
+                    </button>
+                </div>
+                <div className="px-6 mb-6">
+                    <hr className="border-gray-100 border-t-2" />
+                </div>
+
+                <div className="flex flex-col space-y-5 px-6">
+                    <Link href="/" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Home</Link>
+                    <Link href="/shop" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Shop All Categories</Link>
+                    <Link href="/trending" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Trending</Link>
+                    <Link href="/bridal-box" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors flex justify-between items-center">
+                        Bridal Box <span className="bg-[#C6A756] text-white text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded">New</span>
+                    </Link>
+                    <Link href="/compare" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Compare</Link>
+                    <Link href="/about" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">About</Link>
+                    <Link href="/contact" onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-[#C6A756] text-lg font-medium transition-colors">Contact</Link>
+                </div>
+
+                <div className="mt-auto p-6 border-t border-gray-100">
+                    <Link href="/schedule-call" onClick={() => setIsOpen(false)} className="w-full bg-[#128C7E] text-white py-3.5 rounded-xl flex items-center justify-center space-x-2 font-bold shadow-lg shadow-[#128C7E]/20 hover:bg-[#075E54] hover:scale-105 transition-all duration-300">
+                        <Video size={20} />
+                        <span>WhatsApp Chat</span>
+                    </Link>
+                </div>
+            </div>
 
             {/* Mobile Bottom Sticky Bar & Footer */}
             <div className="fixed bottom-0 w-full z-40 md:hidden flex flex-col">
-                <div className="bg-white shadow-lg border-t border-gray-100 h-16 flex justify-around items-center font-poppins text-xs w-full relative">
-                    <Link href="/" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/' ? 'text-[#C6A756] font-bold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
+                <div className="bg-white shadow-[0_-5px_15px_rgba(0,0,0,0.05)] border-t border-gray-100 h-16 flex justify-around items-center font-poppins text-xs w-full relative">
+                    <Link href="/" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/' ? 'text-[#C6A756] font-semibold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
                         <span className="text-[20px] mb-0.5">🏠</span>
                         <span>Home</span>
                     </Link>
-                    <Link href="/shop" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/shop' ? 'text-[#C6A756] font-bold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
+                    <Link href="/shop" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/shop' ? 'text-[#C6A756] font-semibold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
                         <span className="text-[20px] mb-0.5">👗</span>
                         <span>Shop</span>
                     </Link>
                     <div className="relative -top-6 px-2">
-                        <Link href="/schedule-call" className="bg-[#6E0D25] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-[#6E0D25]/30 border-4 border-white active:scale-95 transition-transform">
+                        <Link href="/schedule-call" className="bg-[#6E0D25] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl shadow-[#6E0D25]/40 border-4 border-white active:scale-95 transition-transform">
                             <Video size={24} />
                         </Link>
                     </div>
-                    <Link href="/compare" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/compare' ? 'text-[#C6A756] font-bold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
+                    <Link href="/compare" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 ${pathname === '/compare' ? 'text-[#C6A756] font-semibold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
                         <span className="text-[20px] mb-0.5">⚖️</span>
                         <span>Compare</span>
                     </Link>
-                    <Link href="/cart" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 relative ${pathname === '/cart' ? 'text-[#C6A756] font-bold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
+                    <Link href="/cart" className={`flex flex-col items-center w-full h-full pt-2 transition-all duration-200 relative ${pathname === '/cart' ? 'text-[#C6A756] font-semibold border-t-2 border-[#C6A756] scale-105' : 'text-gray-500 hover:text-[#C6A756] border-t-2 border-transparent'}`}>
                         <span className="text-[20px] mb-0.5">🛒</span>
-                        <span className="absolute top-[3px] right-[calc(50%-18px)] bg-[#C6A756] text-white text-[9px] w-[14px] h-[14px] rounded-full flex items-center justify-center font-normal">2</span>
+                        <span className="absolute top-[3px] right-[calc(50%-18px)] bg-[#C6A756] text-white text-[9px] w-[14px] h-[14px] rounded-full flex items-center justify-center font-normal shadow-sm">2</span>
                         <span>Cart</span>
                     </Link>
                 </div>
